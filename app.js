@@ -1,14 +1,17 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const app = express();
-const cors = require('cors');
-var indexRoutes = require('./routes/indexRoutes'); 
+const port = 3000;
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.listen(port, (err) => {
+    if (err) {
+        return console.log('Something bad happened', err);
+    }
+    console.log(`Server is listening on ${port}`);
+});
 
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
-
-app.use('/api/v1/', indexRoutes);
 
 module.exports = app;
